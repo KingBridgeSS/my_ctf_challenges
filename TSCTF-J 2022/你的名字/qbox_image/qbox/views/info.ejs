@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>update info</title>
+    <!-- Font Awesome -->
+    <link
+            href="/stylesheets/font-awesome.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="/stylesheets/google-fonts.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="/stylesheets/mdb.css"
+            rel="stylesheet"
+    />
+</head>
+<body style="background-color:rgba(248,248,248)">
+<div class="outer">
+    <div class="middle">
+        <!-- userId -->
+        <div class="form-outline mb-4">
+            <input type="email" id="form2Example1" class="form-control" value="<%= info.userId %>" readonly/>
+            <label class="form-label" for="form2Example1">userId</label>
+        </div>
+        <!-- username input -->
+        <div class="form-outline mb-4">
+            <input type="email" id="username" class="form-control" value="<%= info.username %>"/>
+            <label class="form-label" for="form2Example1">Username</label>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="password" id="password" class="form-control" value="<%= info.password %>"/>
+            <label class="form-label" for="form2Example2">Password</label>
+        </div>
+
+
+
+        <!-- Submit button -->
+        <button type="button" id="update" class="btn btn-primary btn-block mb-4">update</button>
+
+
+    </div>
+
+</div>
+<script
+        type="text/javascript"
+        src="/javascripts/mdb.js"
+></script>
+<!-- jquery-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function() {
+        $("#update").click(function(){
+            $.ajax({
+                type: "POST",
+                url: '/users/info',
+                data: {"username":$('#username').val(),"password":$('#password').val()},
+                dataType: "json",
+                success:function(data,status){
+                    switch (data.status) {
+                        case 1:{
+                            window.location='/'
+                            break
+                        }
+                        default:{
+                            alert(data.msg)
+                            break
+                        }
+
+                    }
+                }
+            });
+        });
+    });
+</script>
+<style>
+
+    .middle {
+        margin: 10% auto;
+        width: 50%;
+        text-align: center;
+    }
+</style>
+</body>
+</html>

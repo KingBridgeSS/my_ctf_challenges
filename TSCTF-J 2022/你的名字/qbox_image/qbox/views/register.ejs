@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>register page</title>
+    <!-- Font Awesome -->
+    <link
+            href="/stylesheets/font-awesome.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="/stylesheets/google-fonts.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="/stylesheets/mdb.css"
+            rel="stylesheet"
+    />
+</head>
+<body style="background-color:rgba(248,248,248)">
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="/images/draw2.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <div id="loginForm">
+                    <!-- Username input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="username" class="form-control form-control-lg" />
+                        <label class="form-label" for="form1Example13">Username</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="password" class="form-control form-control-lg" />
+                        <label class="form-label" for="form1Example23">Password</label>
+                    </div>
+                    <!-- Submit button -->
+                    <button id="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jquery-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+
+</script>
+<script
+        type="text/javascript"
+        src="/javascripts/mdb.js"
+></script>
+<script>
+    $(document).ready(function() {
+        $("#submit").click(function(){
+            $.ajax({
+                type: "POST",
+                url: '/users/register',
+                data: {"username":$('#username').val(),"password":$('#password').val()},
+                dataType: "json",
+                success:function(data,status){
+                    switch (data.status) {
+
+                        case 1:{
+                            window.location='/'
+                            break
+                        }
+                        default:{
+                            alert(data.msg)
+                            break
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

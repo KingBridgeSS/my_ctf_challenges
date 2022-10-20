@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>box</title>
+    <!-- Font Awesome -->
+    <link
+            href="/stylesheets/font-awesome.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="/stylesheets/google-fonts.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="/stylesheets/mdb.css"
+            rel="stylesheet"
+    />
+  </head>
+  <body style="background-color:rgba(248,248,248)">
+  <div class="outer">
+    <div class="btn-group shadow-0" role="group">
+      <button id="ask" type="button" class="btn btn-light" data-mdb-color="dark">提问别人</button>
+      <button id="myasks" type="button" class="btn btn-light" data-mdb-color="dark">我的提问</button>
+      <button id="info" type="button" class="btn btn-light" data-mdb-color="dark">更新/查看我的用户信息</button>
+      <button id="login" type="button" class="btn btn-light" data-mdb-color="dark">重新登录</button>
+      <button id="check" type="button" class="btn btn-light" data-mdb-color="dark">让TA看看我的回答！</button>
+    </div>
+    <br><br>
+    <h5>这是你收到的匿名问题</h5>
+    <div>
+        <% questions.forEach(function(question){ %>
+          <%- include('question', {question: question}); %>
+        <% }); %>
+    </div>
+  </div>
+
+
+  <!-- jquery-->
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+  </script>
+  <script
+          type="text/javascript"
+          src="/javascripts/mdb.js"
+  ></script>
+  <script>
+    $(function(){
+      $("#ask").click(function(){
+        window.location='/ask'
+      });
+      $("#myasks").click(function(){
+        window.location='/myasks'
+      });
+      $("#info").click(function(){
+        window.location='/users/info'
+      });
+      $("#login").click(function(){
+        window.location='/users/login'
+      });
+      $("#check").click(function(){
+        $.ajax({
+          type: "GET",
+          url: '/check',
+          success:function(data){
+            switch (data){
+              case 'ok':{
+                alert('已阅 ^_^')
+                break
+              }
+              default:{
+                alert(data)
+              }
+            }
+          }
+        })
+      });
+      $(".answer").click(function(){
+        const questionId=$(this).parent().find("p.questionId").text()
+        const answer=$(this).parent().find("textarea").val()
+        $.ajax({
+          type: "POST",
+          url: '/question/update',
+          data: {"questionId":questionId,"answer":answer},
+          dataType: "json",
+          success:function(data){
+            switch (data.status){
+              case 1:{
+                window.location='/'
+                break
+              }
+              case 0:{
+                alert(data.msg)
+              }
+            }
+          }
+        })
+      });
+      });
+  </script>
+  <style>
+    .outer{
+      margin: 2% auto;
+      text-align: center;
+    }
+    .card{
+      width: 50%;
+      margin: 0 auto;
+      text-align: left;
+    }
+  </style>
+  </body>
+</html>

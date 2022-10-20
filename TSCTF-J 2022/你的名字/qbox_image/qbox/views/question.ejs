@@ -1,0 +1,11 @@
+<br>
+<div class="card">
+    <div class="card-body">
+        <p hidden class="questionId"><%= question.questionId %></p>
+        <h5 class="card-title">Q:</h5>
+        <p class="card-text"><%= question.question %></p>
+        <h5 class="card-title">A:</h5>
+        <textarea style="margin-bottom: 10px" class="form-control" id="textAreaExample" rows="4"><%= question.answer %></textarea>
+        <button type="button" class="btn btn-primary answer">回答</button>
+    </div>
+</div>

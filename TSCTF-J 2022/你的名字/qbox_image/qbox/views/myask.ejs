@@ -1,0 +1,13 @@
+<br>
+<div class="card">
+    <div class="card-body">
+        <p hidden class="questionId"><%= question.questionId %></p>
+        <h5 class="card-title">对 <%- question.askeeName %> 提的问题</h5>
+        <h5 class="card-title">Q:</h5>
+        <p class="card-text"><%- question.question %></p>
+        <h5 class="card-title">A:</h5>
+        <p class="card-text"><%- question.answer %></p>
+        <button type="button" class="btn btn-outline-danger delete" data-mdb-ripple-color="dark">删除问题</button>
+    </div>
+</div>
+

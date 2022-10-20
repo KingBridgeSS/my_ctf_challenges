@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Asks</title>
+    <!-- Font Awesome -->
+    <link
+            href="/stylesheets/font-awesome.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="/stylesheets/google-fonts.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="/stylesheets/mdb.css"
+            rel="stylesheet"
+    />
+</head>
+<body style="background-color:rgba(248,248,248)">
+<div class="outer">
+    <h1><%= username %> 的提问</h1>
+    <h5>这里是你对他人的提问</h5>
+    <div>
+        <% questions.forEach(function(question){ %>
+            <%- include('myask', {question: question}); %>
+        <% }); %>
+    </div>
+</div>
+
+></script>
+<script
+        type="text/javascript"
+        src="/javascripts/mdb.js"
+></script>
+<!-- jquery-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script>
+    $(function(){
+        $(".delete").click(function(){
+            const questionId=$(this).parent().find("p.questionId").text()
+            $.ajax({
+                type: "POST",
+                url: '/question/delete',
+                data: {"questionId":questionId},
+                dataType: "json",
+                success:function(data){
+                    switch (data.status){
+                        case 1:{
+                            window.location='/myasks'
+                            break
+                        }
+                        case 0:{
+                            alert(data.msg)
+                        }
+                    }
+                }
+            })
+        });
+    })
+</script>
+<style>
+    .outer{
+        margin: 3% auto;
+        text-align: center;
+    }
+    .card{
+        width: 50%;
+        margin: 0 auto;
+        text-align: left;
+    }
+</style>
+</body>
+</html>

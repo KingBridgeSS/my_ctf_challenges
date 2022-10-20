@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: bridge
+      MONGO_INITDB_ROOT_PASSWORD: DontWannaLearnDriving555
+
+
+  qbox:
+    build: ./qbox_image
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 43111:3000
+    environment:
+      MONGODB_PATH: mongodb://bridge:DontWannaLearnDriving555@mongo:27017/
+      FLAG: TSCTF-J{Hope_we_meet_the_ones}
+      flagUserPassword: 'wozuolepingguofangqideshipin2021'
+      flagUserId: 390422f5-d039-4563-a777-70e52e6e3b3b
+      jwtSecret: "top_secret: when do we go to school??????????????"
+
+
+

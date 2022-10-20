@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ask</title>
+    <!-- Font Awesome -->
+    <link
+            href="/stylesheets/font-awesome.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="/stylesheets/google-fonts.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="/stylesheets/mdb.css"
+            rel="stylesheet"
+    />
+</head>
+<body style="background-color:rgba(248,248,248)">
+<div class="outer">
+
+    <div class="middle">
+        <h5>你可以在这里提问别人</h5>
+        <h5>你的user id可以在 主页->更新/查看我的用户信息 看到</h5>
+        <!-- userId -->
+        <div class="form-outline mb-4">
+            <input type="email" id="askeeId" class="form-control"/>
+            <label class="form-label" for="form2Example1">被提问人的userid</label>
+        </div>
+        <div class="form-outline">
+            <textarea style="margin-bottom: 10px" class="form-control" id="question" rows="4"></textarea>
+            <label class="form-label" for="textAreaExample">问题内容</label>
+        </div>
+        <!-- Submit button -->
+        <button type="button" id="ask" class="btn btn-primary btn-block mb-4">提问</button>
+
+
+    </div>
+
+</div>
+<script
+        type="text/javascript"
+        src="/javascripts/mdb.js"
+></script>
+<!-- jquery-->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function() {
+        $("#ask").click(function(){
+            $.ajax({
+                type: "POST",
+                url: '/ask',
+                data: {"askeeId":$('#askeeId').val(),"question":$('#question').val()},
+                dataType: "json",
+                success:function(data,status){
+                    switch (data.status) {
+                        case 1:{
+                            window.location='/'
+                            break
+                        }
+                        case -1:{
+                            alert(data.msg)
+                            break
+                        }
+                        case 0:{
+                            alert(data.msg)
+                            break
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+<style>
+
+    .middle {
+        margin: 10% auto;
+        width: 50%;
+        text-align: center;
+    }
+</style>
+</body>
+</html>
